@@ -22,8 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Repositories\Interface\" />
-    <Folder Include="Repositories\Implementation\" />
+    <Folder Include="Images\" />
   </ItemGroup>
 
 </Project>
