@@ -1,5 +1,9 @@
 using BlogPost_API.Data;
 using BlogPost_API.Models.Domain;
+using BlogPost_API.Repositories.Implementation;
+using BlogPost_API.Repositories.Interface;
+using BlogPost_API.Services.Abstract;
+using BlogPost_API.Services.Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +50,14 @@ builder.Services.AddAuthentication(options =>
 });
 
 
+// Repositories
+builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IImageRepository, ImageRepository>();
+
+// Services
+builder.Services.AddTransient<ITokenService, TokenService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -61,6 +73,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// enable CORs policy
+app.UseCors(options =>
+                    options.WithOrigins("*")
+                           .AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

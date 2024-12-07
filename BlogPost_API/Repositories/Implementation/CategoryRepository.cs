@@ -1,10 +1,11 @@
 ﻿using BlogPost_API.Data;
 using BlogPost_API.Models.Domain;
+using BlogPost_API.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogPost_API.Repositories.Implementation
 {
-    public class CategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly DatabaseContext _context;
 
