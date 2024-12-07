@@ -187,54 +187,54 @@ namespace BlogPost_API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("administrator")]
-        public async Task<IActionResult> RegistrationAdmin([FromBody] Registration model)
-        {
-            var status = new Status();
-            if (!ModelState.IsValid)
-            {
-                status.StatusCode = 0;
-                status.Message = "Please pass all the required fields";
-                return Ok(status);
-            }
-            // check if user exists
-            var userExists = await _userManager.FindByNameAsync(model.Username);
-            if (userExists != null)
-            {
-                status.StatusCode = 0;
-                status.Message = "Invalid username";
-                return Ok(status);
-            }
-            var user = new ApplicationUser
-            {
-                UserName = model.Username,
-                SecurityStamp = Guid.NewGuid().ToString(),
-                Email = model.Email,
-                Name = model.Name
-            };
-            // create a user here
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (!result.Succeeded)
-            {
-                status.StatusCode = 0;
-                status.Message = "User creation failed";
-                return Ok(status);
-            }
+        //[HttpPost("administrator")]
+        //public async Task<IActionResult> RegistrationAdmin([FromBody] Registration model)
+        //{
+        //    var status = new Status();
+        //    if (!ModelState.IsValid)
+        //    {
+        //        status.StatusCode = 0;
+        //        status.Message = "Please pass all the required fields";
+        //        return Ok(status);
+        //    }
+        //    // check if user exists
+        //    var userExists = await _userManager.FindByNameAsync(model.Username);
+        //    if (userExists != null)
+        //    {
+        //        status.StatusCode = 0;
+        //        status.Message = "Invalid username";
+        //        return Ok(status);
+        //    }
+        //    var user = new ApplicationUser
+        //    {
+        //        UserName = model.Username,
+        //        SecurityStamp = Guid.NewGuid().ToString(),
+        //        Email = model.Email,
+        //        Name = model.Name
+        //    };
+        //    // create a user here
+        //    var result = await _userManager.CreateAsync(user, model.Password);
+        //    if (!result.Succeeded)
+        //    {
+        //        status.StatusCode = 0;
+        //        status.Message = "User creation failed";
+        //        return Ok(status);
+        //    }
 
-            // add roles here
-            // for admin registration UserRoles.Admin instead of UserRoles.Roles
-            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+        //    // add roles here
+        //    // for admin registration UserRoles.Admin instead of UserRoles.Roles
+        //    if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+        //        await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
 
-            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
-            {
-                await _userManager.AddToRoleAsync(user, UserRoles.Admin);
-            }
-            status.StatusCode = 1;
-            status.Message = "Sucessfully registered";
-            return Ok(status);
+        //    if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+        //    {
+        //        await _userManager.AddToRoleAsync(user, UserRoles.Admin);
+        //    }
+        //    status.StatusCode = 1;
+        //    status.Message = "Sucessfully registered";
+        //    return Ok(status);
 
-        }
+        //}
 
     }
 }
