@@ -4,6 +4,6 @@ namespace BlogPost_API.Models.Domain
 {
     public class ApplicationUser : IdentityUser
     {
-        string? Name { get; set; }
+        public string? Name { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BlogPost_API.Models.DTO
 {
-    public class Login
+    public class LoginModel
     {
         [Required]
         public string? Username { get; set; }
