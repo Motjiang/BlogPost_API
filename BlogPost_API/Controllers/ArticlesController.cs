@@ -110,7 +110,7 @@ namespace BlogPost_API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("search/{id}")]
         public async Task<IActionResult> GetArticlePostById([FromRoute] int id)
         {
             // Get the articlePost from Repo
@@ -145,7 +145,7 @@ namespace BlogPost_API.Controllers
         }
 
         [HttpGet]
-        [Route("{urlHandle}")]
+        [Route("view/{urlHandle}")]
         public async Task<IActionResult> GetArticlePostByUrlHandle([FromRoute] string urlHandle)
         {
             // Get articlepost details from repository
